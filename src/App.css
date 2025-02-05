@@ -1,14 +1,56 @@
+/* Add this in your index.html head section */
+/* <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"> */
+
+:root {
+  --primary: #7c3aed;
+  --secondary: #ff6b6b;
+  --accent: #4fd1c5;
+  --dark: #1a1a2e;
+  --darker: #16213e;
+  --neon: #00f3ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(45deg, var(--dark), var(--darker));
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+}
+
 .calculator-container {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(0, 243, 255, 0.4), 0 0 40px rgba(0, 243, 255, 0.2);
+  }
 }
 
 h1, h2 {
-  color: #2c3e50;
+  color: var(--neon);
   text-align: center;
   margin-bottom: 2rem;
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .input-group {
@@ -16,86 +58,231 @@ h1, h2 {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
+  animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .input-container {
-  background: #f8f9fa;
+  background: rgba(255, 255, 255, 0.05);
   padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.input-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.input-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.input-container:hover::after {
+  transform: scaleX(1);
 }
 
 label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #4a5568;
+  color: var(--accent);
   font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 input {
   width: 100%;
-  padding: 0.8rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 6px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  color: #fff;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 input:focus {
   outline: none;
-  border-color: #4299e1;
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+}
+
+input:hover {
+  transform: scale(1.02);
 }
 
 .results {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  margin: 2rem 0;
+  margin: 3rem 0;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .result-box {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(79, 209, 197, 0.1), rgba(124, 58, 237, 0.1));
+  padding: 2rem;
+  border-radius: 15px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.result-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+}
+
+.result-box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: rotate(45deg) translateX(-150%);
+  }
+  100% {
+    transform: rotate(45deg) translateX(150%);
+  }
 }
 
 .result-box h3 {
-  color: #4a5568;
+  color: var(--accent);
   margin-bottom: 1rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .result-box p {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #2d3748;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  z-index: 1;
 }
 
 .result-box.accent {
-  background: #4299e1;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
 }
 
 .result-box.accent h3,
 .result-box.accent p {
-  color: white;
+  color: #fff;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .chart-container {
-  background: white;
+  background: rgba(255, 255, 255, 0.05);
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   margin-top: 2rem;
+  animation: chartEntrance 1s ease-out;
+}
+
+@keyframes chartEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.recharts-cartesian-grid line {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.recharts-line {
+  filter: drop-shadow(0 0 8px var(--neon));
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--primary), var(--secondary));
+  border-radius: 4px;
 }
 
 @media (max-width: 768px) {
   .calculator-container {
     padding: 1rem;
+    margin: 1rem;
   }
   
   .input-group {
     grid-template-columns: 1fr;
   }
+  
+  .result-box p {
+    font-size: 1.4rem;
+  }
+  
+  input {
+    padding: 0.8rem;
+  }
+}
+
+/* Hover animations for chart */
+.recharts-surface:hover {
+  cursor: crosshair;
+}
+
+.recharts-tooltip {
+  background: var(--darker) !important;
+  border: 1px solid var(--primary) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
 }
